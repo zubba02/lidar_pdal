@@ -49,3 +49,14 @@ for j in all_files:
     json.dump(i, outfile)
 
   subprocess.call('{} pipeline {}.json'.format(path_to_pdal,j), shell=True)
+	
+all_files = [i for i in glob.iglob('*.tif')]
+
+lines = all_files
+with open('make_merge.sh', 'w') as f:
+    f.write('gdal_merge.py  -init 255 -o out.tif ')
+    for line in lines:
+        f.write(line)
+        f.write(' ')
+	
+subprocess.call('./make_merge.sh', shell=True)
