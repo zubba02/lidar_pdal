@@ -54,9 +54,11 @@ all_files = [i for i in glob.iglob('*.tif')]
 
 lines = all_files
 with open('make_merge.sh', 'w') as f:
-    f.write('gdal_merge.py  -init 255 -o out.tif ')
+    f.write('gdal_merge.py  -init 255 -o Merged.tif ')
     for line in lines:
         f.write(line)
         f.write(' ')
 	
 subprocess.call('./make_merge.sh', shell=True)
+
+subprocess.call('gdal2xyz.py -band 1 -csv Merged.tif To_Grid.csv', shell=True)
