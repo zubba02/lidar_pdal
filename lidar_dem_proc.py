@@ -49,7 +49,9 @@ for j in all_files:
     json.dump(i, outfile)
 
   subprocess.call('{} pipeline {}.json'.format(path_to_pdal,j), shell=True)
-	
+
+import glob
+
 all_files = [i for i in glob.iglob('*.tif')]
 
 lines = all_files
